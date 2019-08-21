@@ -1,0 +1,26 @@
+.sidebar {
+    left: "75%";
+    height: "610px";
+    border-left: "2px solid black";
+}
+.sidebar > div{
+    letter-spacing: "1.5px";
+    color: "black";
+    border: "1px solid rgba(165, 164, 164, 0.658)"; 
+    cursor: "pointer";
+}
+.sidebar > div:hover{
+    background-color: "rgba(228, 226, 226, 0.781)";
+}
+.sidebar .receiver{
+    border: "2px solid blue";
+}
+.sidebar small{
+    font-size: "1.7em";
+    color: "red";
+}
+/* News Feeds */
+
+.min-width{
+    min-width: "380px";
+}

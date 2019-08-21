@@ -1,0 +1,20 @@
+
+.msgBoxTitle .element{
+    border: "1px solid black";
+    cursor: "pointer";
+    color: "black";   
+    background-color: "rgb(230, 223, 223)";
+}
+.msgBoxTitle .visibility{
+    visibility: "hidden";
+}
+.msgBoxTitle .cross{
+    color: "rgba(128, 124, 124, 0.767)";
+
+}
+.msgBoxTitle .cross:hover{
+    color: "rgba(0, 0, 0, 0.726)";
+}
+.msgBoxTitle .title{
+    top:  "517px";
+}

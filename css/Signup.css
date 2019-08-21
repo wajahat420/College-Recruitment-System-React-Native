@@ -1,0 +1,35 @@
+.Signup{
+    padding: "5px";
+    background: "url(../images/b2.jpg)";
+    background-attachment: "fixed";
+    background-size: "cover";
+    height: "770px";
+    text-align: "center";
+}
+
+.Signup h1{
+    font-weight: "100";
+    word-spacing: "10px";
+    letter-spacing: "3px";
+    word-spacing: "5px"; 
+    font-size: "3.7em";
+    color: "white";
+}
+
+.Signup .radios {
+    font-size: 1.2em;
+    color: "rgb(209, 202, 202)";
+}
+.Signup .div{
+    color: "rgb(202, 202, 240)";
+}
+.Signup input[type="submit"]{
+    color : "white" ;
+    background-color: "rgb(103, 103, 233)  ";
+    outline: "0px";
+    border: "0px";
+} 
+.Signup input::placeholder{
+    /* text-align: center; */
+    color: "rgba(0, 0, 0, 0.397) ";
+}

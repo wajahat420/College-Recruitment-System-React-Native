@@ -1,0 +1,28 @@
+.msgWindow{
+    border: "1px solid rgb(202, 200, 200)";
+    position: "absolute";
+    top: "305px";
+}
+.msgWindow header{
+    background-color:" rgb(228, 221, 221)"
+}
+.msgWindow header:hover{
+    cursor: "pointer";
+}
+.msgWindow >  div{
+    background-color: "white";
+    height: "232px";
+    overflow-y: "scroll";
+
+}
+.fa-arrow-right{
+    /* background-color: blue; */
+    background-color: "blue";
+    color: "white";    
+    cursor: "pointer";
+    font-size: "1.2em";
+}
+.fa-arrow-right:hover{
+    color: rgb(235, 233, 233);
+    background-color: rgb(24, 24, 252);
+}
