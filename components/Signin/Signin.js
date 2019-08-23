@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import SigninUI from "./Signin-UI.js"
-import {View,Text} from "react-native"
+import {View} from "react-native"
 // import axios from "axios"
 // import {Redirect} from "react-router-dom"
 // import {connect} from "react-redux"
@@ -41,7 +41,7 @@ import {View,Text} from "react-native"
         // if(this.state.redirect){
         //     return <Redirect to="/News_Feeds" />
         // }
-        console.warn(this.state.email)
+        // console.warn(this.state.email)
         return (
             <View>
                 {/* <Text>Hello</Text> */}

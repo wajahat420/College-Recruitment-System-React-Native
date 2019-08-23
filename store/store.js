@@ -26,11 +26,11 @@ const reducer = (state = {
                 AllPosts : [...state.AllPosts,{
                     text:action.postText,
                     img:action.imageURL,
-                    name : state.signin.firstName + " " + state.signin.lastName,
+                    name : "unknown",
                     likes : []
                 }]
             };
-            // console.log("All Posts",state.AllPosts)
+            // console.warn("All Posts",state.AllPosts)
             break;
         case 'MSG_BOX_TITLES':
             state = {

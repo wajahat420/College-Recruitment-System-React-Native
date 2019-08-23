@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import OutputPostUI from "./OutputPostUI"
 import {connect} from "react-redux";
-import axios from "axios"
+// import axios from "axios"
 
  class AllPosts extends Component {
 
@@ -9,42 +9,44 @@ import axios from "axios"
 
         const{signin} = this.props
         console.log("id is",signin.email)
-        axios.post("/LikeClicked",{
-            postId : id,
-            email : signin.email
-        })
-        .catch(err=>alert("error "+err))
-        this.props.toggleLike(index)
+        // axios.post("/LikeClicked",{
+        //     postId : id,
+        //     email : signin.email
+        // })
+        // .catch(err=>alert("error "+err))
+        // this.props.toggleLike(index)
     }
 
     render() {
-        console.log("render...")
         return (
-            this.props.AllPosts.map((elem,index)=>{
-                // console.log("likes",elem.likes)
-                const {signin} = this.props
-                console.log("eee",elem.likes)
-                if(elem.like === undefined){
-                    let like = false
-                    elem.likes.forEach((element)=>{
-                    if(signin.email === element){
-                        like = true
+
+                this.props.AllPosts.map((elem,index)=>{
+                    // console.log("likes",elem.likes)
+                    // const {signin} = this.props
+                    console.log("eee",elem.likes)
+                    if(elem.like === undefined){
+                        let like = false
+                        elem.likes.forEach((element)=>{
+                        if(signin.email === element){
+                            like = true
+                        }
+                        elem.like = like
+                        })  
                     }
-                    elem.like = like
-                    })  
-                }
-                console.log("elem",elem.name)
-                return(
-                    <OutputPostUI 
-                        key = {index}
-                        name = {elem.name}
-                        postText={elem.text}
-                        imageURL={elem.img}
-                        getLikeFromDb = {elem.like}
-                        like={()=>this.like(elem.postId,index)}
-                        />
-                )
-            })
+                    console.log("elem",elem.name)
+                    return(
+                        <OutputPostUI 
+                            key = {index}
+                            name = {elem.name}
+                            text={elem.text}
+                            img={elem.img}
+                            getLikeFromDb = {elem.like}
+                            like={()=>this.like(elem.postId,index)}
+                            />
+                    )
+                 })
+
+
         )
     }
 }

@@ -1,12 +1,13 @@
-/**
- * Sample React Native App
- * https://github.com/facebook/react-native
- *
- * @format
- * @flow
- */
+import {createStackNavigator,createAppContainer} from 'react-navigation';
 
-import Signin from  "./components/Signin/Signin"
+import Navbar from "./components/navbar/navbar"
+import Signin from "./components/Signin/Signin"
+import NewsFeeds from  "./components/News-Feeds/News-feeds"
+
+
+// import Routing from "./Routing"
+import FirstPage from './first';
+import SecondPage from './second';
 
 import React, {Fragment} from 'react';
 import {
@@ -27,10 +28,26 @@ import {
 } from 'react-native/Libraries/NewAppScreen';
 
 const App = () => {
+
+  const Navigate = createStackNavigator({
+      FirstPage: { screen: FirstPage },
+      SecondPage: { screen: SecondPage }, 
+      NewsFeeds : {screen : NewsFeeds}	
+    },
+  {
+    initialRouteName: 'FirstPage',
+  }
+);
+const Routing = createAppContainer(Navigate)
+
   return (
     // 
     <Fragment>
-      <Signin/>
+      
+      <Navbar/>
+      <NewsFeeds/>
+      {/* <Routing/> */}
+      {/* <Signin/> */}
       {/* <Text>Mainkkkkk</Text> */}
     </Fragment>
   );
@@ -76,3 +93,13 @@ const styles = StyleSheet.create({
 });
 
 export default App;
+
+
+
+
+
+
+
+
+
+
