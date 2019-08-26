@@ -2,38 +2,38 @@ import React, { Component } from 'react'
 import {
 	Text,
 	View,
-	FlatList,
-	ListView,
+	TouchableOpacity,
 	StyleSheet,
 	Button
 	
 } from "react-native"
-// import { Button } from 'native-base';
 
 export default class navbar extends Component {
+	state = {
+		sidebarClick : false
+	}
+
 	click = () => {
 		console.warn("working")
 	}
 	render() {
+		// console.warn("this.state.click",this.state.sidebarClick)
 		return (
 			<View style={styles.container}>
-				<Button 
-					title="feeds"
-					onPress={() => {
-						this.props.navigation.navigate('SecondPage');
-					  }}				 	style={styles.links}>Feeds</Button>
+				<Text onPress={(e)=>this.click()}
+					style={styles.links}>Students</Text>
 				<Text onPress={(e)=>this.click()} 
 					style={styles.links}>Students</Text>
 				<Text onPress={(e)=>this.click()} 
 					style={styles.links}>Feedbacks</Text>
 				<Text onPress={(e)=>this.click()} 
 					style={styles.links}>Login</Text>
-				<View onResponderEnd={()=>this.click()} style={styles.sidebar}>
-					<Text onPress={(e)=>this.click()} style={styles.lines} ></Text>
-					<Text onPress={(e)=>this.click()} style={styles.lines}></Text>
-					<Text onPress={(e)=>this.click()} style={styles.lines}></Text>
-					{/* <Text style={styles.lines}></Text> */}
-				</View>
+				<TouchableOpacity onPress={()=>this.setState({sidebarClick  : !this.state.sidebarClick})} 
+						style={ styles.sidebar}>
+					<Text style={this.state.sidebarClick ? styles.Click : styles.lines} ></Text>
+					<Text style={this.state.sidebarClick ? styles.Click : styles.lines}></Text>
+					<Text style={this.state.sidebarClick ? styles.Click : styles.lines}></Text>
+				</TouchableOpacity>
 		  </View>
 		)
 	}
@@ -47,28 +47,29 @@ const styles = StyleSheet.create({
 		flexDirection : "row" ,
 		paddingTop: 4,
 		padding : 10,
-		
 		alignItems: 'center', 
 
 	},
-	links : {
-		
+	links : {	
 		flex  : 1,
 		color:"white",
 		fontSize : 14,
 		textAlign : "center"
 	},
+	Click : {
+		margin : 2,
+		width : 17,
+		height: 2,
+		backgroundColor : "red"
+	},
 	sidebar : {
-		height : 15,
-		// paddingTop : 3,
+		height : 17,
 		display : "flex",
-		flexDirection : "column"
 	},
 	lines : {
 		margin : 2,
 		width : 17,
 		height: 2,
-		color : "white",
 		backgroundColor : "white"
 	}
   })

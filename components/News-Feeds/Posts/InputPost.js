@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 // import "../../../css/Posts.css"
 import {connect} from "react-redux";
 // import axios from 'axios';
-import {Text,View,Button,TextInput,Image,FileReader,StyleSheet} from "react-native"
+import {Text,View,Button,TextInput,Image,TouchableOpacity,StyleSheet} from "react-native"
 import ImagePicker from 'react-native-image-picker';
 // import { connect } from 'tls';
 
@@ -31,11 +31,7 @@ class Posts extends Component {
 
     // More info on all the options is below in the API Reference... just some common use cases shown here
     
-  
-  /**
-   * The first arg is the options object for customization (it can also be null or omitted for default options),
-   * The second arg is the callback which sends object: response (more info in the API Reference)
-   */
+ 
   image = () => {
 
     ImagePicker.showImagePicker(options, (response) => {
@@ -108,7 +104,7 @@ class Posts extends Component {
                     
                     <View style={styles.border}>
 
-                        <View className="  col-sm-10 col-md-7 m-auto p-0">
+                        <View>
                             
                             <TextInput
                                 style={styles.comment
@@ -122,26 +118,19 @@ class Posts extends Component {
                         
                         <View>
                             {this.state.imageURL !== "" && <Image
-                                style={{width: 50, height: 50}}
+                                style={{width: 80, height: 70,marginLeft : 6}}
                                 source={this.state.imageURL}
                             />}
                         </View>
-                        <View style={{display : "flex",flexDirection:"row"}}>
-                            <View style={{flex : 2}}>
+                        <View style={styles.bottom}>
+                            <View style={{flex : 3}}>
                                 <Text style={{marginLeft : 5,marginTop :4}} onPress={this.image} htmlFor="photo" className="p-2 m-0">
                                     Image
                                 </Text>
                             </View>
-                            <View style={{flex :1,width : 30}}>
-                                <Button
-                                    style={styles.button}
-                                    onPress = {this.post}
-                                    disabled = {this.state.loading}
-                                    title="Post"
-                                    color="#841584"
-                                    accessibilityLabel="Login into Recruitment"
-                                />
-                            </View>
+                            <TouchableOpacity style={{flex : 1}}   onPress={this.post}>
+                                <Text style={styles.button}>Post</Text>
+                            </TouchableOpacity>
                         </View>
                     </View>
                 </View>
@@ -160,13 +149,21 @@ const styles  = StyleSheet.create({
         borderRadius : 3,
     },
     comment : {
-        // borderTopWidth : 2,
-        borderBottomWidth : 2,
-        borderColor :"grey",
         height : 60
     },
     button :  {
-        width : 10
+        color :"white",
+        padding : 4,
+        borderRadius : 2,
+        textAlign :"center",
+        backgroundColor :"blue"
+    },
+    bottom : {
+        display : "flex",
+        flexDirection:"row",
+        borderTopColor: "gray",
+        borderTopWidth : 2
+        
     }
 })
 

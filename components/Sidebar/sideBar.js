@@ -1,21 +1,28 @@
 import React from "react"
 import "../../../css/sidebar.css"
 import {connect} from "react-redux";
-import axios from "axios"
+// import axios from "axios"
+
+import {
+    Touchable,
+    View,
+    Text,
+    StyleSheet
+} from "react-native"
 
 class SideBar extends React.Component{
 
-    constructor(){
-        super()
-        axios.get("/fetchStudentsFromDB")
-        .then(res=>{
-            this.props.setStudents(res.data)
-            // console.log("res.data",res.data)
-        })
-        .catch(err => alert("error "+err))
+    // constructor(){
+    //     super()
+    //     axios.get("/fetchStudentsFromDB")
+    //     .then(res=>{
+    //         this.props.setStudents(res.data)
+    //         // console.log("res.data",res.data)
+    //     })
+    //     .catch(err => alert("error "+err))
 
 
-    }
+    // }
 
     onClick = (receiver) => {
         let valid = true
@@ -40,25 +47,43 @@ class SideBar extends React.Component{
     render(){
         
         return(
-        <div className={(this.props.signin.as==="student"?"d-none":"")+" sidebar text-center position-fixed  col-3 p-0"}>
+
+            <View style={styles.container}>
+                {this.props.students.map(elem=>{
+                    <Text style={styles.elem}>{elem}</Text>
+                })}
+            </View>
+        // <div className={(this.props.signin.as==="student"?"d-none":"")+" sidebar text-center position-fixed  col-3 p-0"}>
             
-            {this.props.students.map((elem,index)=>{
-                return(
-                    <div className={(this.props.getReceiver === elem.firstName ? "receiver " : "") + "p-2"  }
-                         onClick={() => this.onClick(elem.firstName)} 
-                         key={index}
-                     >
-                        <div className="col-12 p-0 ">
-                            {elem.firstName}
-                        </div>
-                     </div>
-                )
-            })
-            }
-        </div>
+        //     {this.props.students.map((elem,index)=>{
+        //         return(
+        //             <div className={(this.props.getReceiver === elem.firstName ? "receiver " : "") + "p-2"  }
+        //                  onClick={() => this.onClick(elem.firstName)} 
+        //                  key={index}
+        //              >
+        //                 <div className="col-12 p-0 ">
+        //                     {elem.firstName}
+        //                 </div>
+        //              </div>
+        //         )
+        //     })
+        //     }
+        // </div>
+
         )
     }
 }
+
+const styles  = StyleSheet.create({
+    container : {
+        display : "flex",
+        alignItems : "center"
+    },
+    elem :  {
+        padding : 3,
+        margin :3
+    }
+})
 
 const mapStateToProps = (state) => {
     return {

@@ -5,7 +5,8 @@ import {
     Text,
     Image,
     StyleSheet,
-    View
+    View,
+    TouchableOpacity
 } from "react-native"
 
 class OutputPosts extends Component {
@@ -44,9 +45,15 @@ class OutputPosts extends Component {
                     source={this.props.img}
                 />}
                 <View style={styles.container}>
-                    <Text style={styles.elem} >Like</Text>
-                    <Text style={styles.elem}>Comment</Text>
-                    <Text style={styles.elem}>Share</Text>
+                    <TouchableOpacity style={styles.elem}>
+                        <Text  style={{textAlign :"center"}}>Like</Text>
+                    </TouchableOpacity>
+                    <TouchableOpacity style={styles.elem}>
+                        <Text style={{textAlign :"center"}}>Comment</Text>
+                    </TouchableOpacity>
+                    <TouchableOpacity style={styles.elem}>
+                        <Text style={{textAlign :"center"}}>Share</Text>
+                    </TouchableOpacity>
                 </View>
             </View>
         )

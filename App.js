@@ -1,9 +1,9 @@
-import {createStackNavigator,createAppContainer} from 'react-navigation';
+// import {createStackNavigator,createAppContainer} from 'react-navigation';
 
 import Navbar from "./components/navbar/navbar"
-import Signin from "./components/Signin/Signin"
-import NewsFeeds from  "./components/News-Feeds/News-feeds"
-
+// import Signin from "./components/Signin/Signin"
+// import NewsFeeds from  "./components/News-Feeds/News-feeds"
+import Feedback from "./components/Feedback/main"
 
 // import Routing from "./Routing"
 import FirstPage from './first';
@@ -27,30 +27,38 @@ import {
   ReloadInstructions,
 } from 'react-native/Libraries/NewAppScreen';
 
-const App = () => {
 
-  const Navigate = createStackNavigator({
-      FirstPage: { screen: FirstPage },
-      SecondPage: { screen: SecondPage }, 
-      NewsFeeds : {screen : NewsFeeds}	
-    },
-  {
-    initialRouteName: 'FirstPage',
+// const Navigate = createStackNavigator({
+//   FirstPage: { screen: FirstPage },
+//   SecondPage: { screen: SecondPage }, 
+//   NewsFeeds : {screen : NewsFeeds}	
+// },
+// {
+// initialRouteName: 'FirstPage',
+// }
+// );
+// const Routing = createAppContainer(Navigate)
+
+class App extends React.Component {
+
+  state = {
+    sidebar : true
   }
-);
-const Routing = createAppContainer(Navigate)
 
-  return (
-    // 
-    <Fragment>
-      
-      <Navbar/>
-      <NewsFeeds/>
-      {/* <Routing/> */}
-      {/* <Signin/> */}
-      {/* <Text>Mainkkkkk</Text> */}
-    </Fragment>
-  );
+  render(){
+      return (
+        
+        <Fragment>
+          
+          <Navbar/>
+          {/* <NewsFeeds/> */}
+          <Feedback/>
+          {/* <Routing/> */}
+          {/* <Signin/> */}
+        </Fragment>
+      );
+  }
+
 };
 
 const styles = StyleSheet.create({
