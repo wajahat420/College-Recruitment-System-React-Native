@@ -1,10 +1,13 @@
-import React from 'react'
+import React,{Fragment} from 'react'
 import InputFeedback from "./inputFeedback"
-// import Navbar from "./feedback-navbar"
-// import AllFeedback from "./allFeedbacks/allFeedbacks"
+import Navbar from "./feedback-navbar"
+
+// import FeedbackUI from "./allFeedbacks/FeedbacksUI"
+import AllFeedback from "./allFeedbacks/allFeedbacks"
 
 // import "../../css/feedback.css"
 
+import {Text,View,TouchableOpacity,ScrollView} from "react-native"
 
 export default class main extends React.Component {
 	state = {
@@ -12,27 +15,27 @@ export default class main extends React.Component {
 		sendFeedback : false
 	}
 	render(){
+		let component = null
+		if(this.state.clicked === "feedback"){
+			component = <InputFeedback/>
+		}else{
+			component = <AllFeedback clicked={this.state.clicked}/>
+		}
 		return (
-			// <div style={{minWidth : "350px"}} className="feedback-main">
+			
+			<Fragment>
+				<Navbar setClicked = {(e)=>this.setState({clicked : e})}/>
+				<View style={{flexDirection : "row-reverse"}}>
+					<TouchableOpacity onPress={()=> this.setState({clicked:"feedback"})} style={{flex: 1}}>
+						<Text style={{textAlign : "right",marginRight : 3,color : "blue"}}>Send Feedack</Text>
+					</TouchableOpacity>
+				</View>
+				<View >
+					{component}
+				</View>
+			
 
-			// 	<Navbar
-			// 		checkClicked={this.state.clicked}
-			// 		setClicked={(value)=>this.setState({clicked : value,sendFeedback:false})}
-			// 		/>
-			// 	<p 
-			// 	onClick ={()=> this.setState({sendFeedback : true,clicked:""})}
-			// 	className="text-right link p-2">
-			// 		send feedback
-			// 	</p>
-			// 	<div className={(this.state.sendFeedback ?"":"d-none")}>
-			// 		<InputFeedback/>
-			// 	</div>
-			// 	<div className={this.state.clicked === ""?"d-none":""}>
-			// 		<AllFeedback
-			// 			clicked = {this.state.clicked}/>
-			// 	</div>
-			// </div>
-			<InputFeedback/>
+			</Fragment>
 
 		)
 	}

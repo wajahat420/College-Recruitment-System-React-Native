@@ -38,7 +38,7 @@ import {
 // }
 // );
 // const Routing = createAppContainer(Navigate)
-
+// import MongoStitch from "./mongo-stitch"
 class App extends React.Component {
 
   state = {
@@ -49,7 +49,7 @@ class App extends React.Component {
       return (
         
         <Fragment>
-          
+          {/* <MongoStitch/> */}
           <Navbar/>
           {/* <NewsFeeds/> */}
           <Feedback/>

@@ -1,6 +1,6 @@
 import React from 'react'
 import Remarks from "./remarks"
-// import {connect} from "react-redux"
+import {connect} from "react-redux"
 // import axios from "axios"
 
 
@@ -9,7 +9,8 @@ import {
 	TouchableOpacity,
 	View,
 	TextInput,
-	ScrollView
+	ScrollView,
+	Button
 	
 } from "react-native"
 import RadioForm from 'react-native-simple-radio-button';
@@ -27,23 +28,70 @@ class main extends React.Component {
 	state ={ 
 		clickedDiv : 0,
 		comments : "",
-		fulfillingCriteria : 0,
-		webExperience : 0,
-		requirementFulfill : 0,
-		searchingFor : 0,
+		fulfillingCriteria : -1,
+		webExperience : -1,
+		requirementFulfill : -1,
+		searchingFor : -1,
 		value: 0,
 	}
 
-	getChecked = (v)=>{
-		console.warn("value",v)
-	}
+
 
 	submit = () =>{
 		console.log("signin",this.props.signin)
 		const {signin} = this.props
-		const{comments,fulfillingCriteria,webExperience,requirementFulfill,searchingFor} = this.state
+		let{comments,fulfillingCriteria,webExperience,requirementFulfill,searchingFor} = this.state
 		
-		if(signin &&fulfillingCriteria && webExperience && requirementFulfill && searchingFor){
+
+
+		if(!signin){
+			alert("Plese Login First")
+		}
+
+		else if(fulfillingCriteria >= 0  && webExperience >= 0  && requirementFulfill >= 0 && searchingFor >= 0){
+
+			if(webExperience >=0 && webExperience <= 4){
+				webExperience = "Bad"
+			}else if(webExperience >=5 && webExperience <= 7){
+				webExperience = "Good"
+			}else{
+				webExperience = "Excellent"
+			}
+	
+			if(fulfillingCriteria >=0 && fulfillingCriteria <= 4){
+				fulfillingCriteria = "Bad"
+			}else if(fulfillingCriteria >=5 && fulfillingCriteria <= 7){
+				fulfillingCriteria = "Good"
+			}else{
+				fulfillingCriteria = "Excellent"
+			}
+	
+			if(requirementFulfill === 0){
+				requirementFulfill = "Yes"
+			}else{
+				requirementFulfill = "No"
+			}
+	
+			if(searchingFor === 0){
+				searchingFor = "Job"
+			}else if(searchingFor === 1){
+				searchingFor = "Internship"
+			}else{
+				searchingFor = "Other"
+			}
+
+			const feedback = {
+				email : signin.email,
+				webExperience,
+				fulfillingCriteria,
+				requirementFulfill,
+				searchingFor,
+				comments
+			}
+
+			this.props.insertFeeback(feedback)
+
+
 			// axios.post("/submitFeedback",{
 			// 	email : signin.email,
 			// 	fulfillingCriteria,
@@ -54,67 +102,103 @@ class main extends React.Component {
 			// })
 			// .then(()=>console.log("Submit Successfully"))
 			// .catch(()=>alert("Error in Sending Request"))
+		}else{
+			alert("Please Fill all fields")
 		}
+
 	}
 
 	render(){
 
 		return (
-			<View>
-				<Text>
-						What is your overall website experience?
-				</Text>
-				<Remarks
-				 	valueIndex = {this.state.webExperience}
-					setValueIndex = {(i)=>this.setState({webExperience : i})}
-				/>
+			<ScrollView>
 
-				<Text>
-					Does it fulfill your requirement?
-				</Text>
-				<RadioForm
-					radio_props={yesNo}
-					initial={-1}
-					// buttonColor={''}
-					onPress = {(i)=>this.setState({requirementFulfill : i})}
-				/>
+				<View style={{marginHorizontal : 10,marginBottom : 20}}>
+					<Text>
+							What is your overall website experience?
+					</Text>
+					<Remarks
+						valueIndex = {this.state.webExperience}
+						setValueIndex = {(i)=>this.setState({webExperience : i})}
+					/>
 
-				<Text>
-					Are Student's fulfilling your criteria?
-				</Text>
-				<Remarks
-				 	valueIndex = {this.state.fulfillingCriteria}
-					setValueIndex = {(i)=>this.setState({fulfillingCriteria : i})}
-				/>
+					<Text>
+						Does it fulfill your requirement?
+					</Text>
+					<RadioForm
+						radio_props={yesNo}
+						initial={-1}
+						// buttonColor={''}
+						onPress = {(i)=>this.setState({requirementFulfill : i})}
+					/>
 
-				<Text>
-					For what yo are searching ?
-				</Text>
-				<RadioForm
-					radio_props={searchingFor}
-					initial={-1}
-					// buttonColor={''}
-					onPress = {(i)=>this.setState({searchingFor : i})}
-				/>
+					<Text>
+						Are Student's fulfilling your criteria?
+					</Text>
+					<Remarks
+						valueIndex = {this.state.fulfillingCriteria}
+						setValueIndex = {(i)=>this.setState({fulfillingCriteria : i})}
+					/>
 
-				<Text>
-					Any Message for University?
-				</Text>
-				<TextInput
-					style={{height : 60,borderColor : "black",borderWidth : 1}}
-					placeholder="Highly regarded for your msg..."
-					placeholderTextColor = "white"
-					onChangeText={(text)=>this.setState({comments : text})}
-					// value={this.state.text}
-				/>			
-			</View>
+					<Text>
+						For what yo are searching ?
+					</Text>
+					<RadioForm
+						radio_props={searchingFor}
+						initial={-1}
+						
+						// buttonColor={''}
+						onPress = {(i)=>this.setState({searchingFor : i})}
+					/>
+
+					<Text>
+						Any Message for University?
+					</Text>
+					<TextInput
+						style={{height : 60,borderColor : "black",borderWidth : 1}}
+						placeholder="Highly regarded for your msg..."
+						placeholderTextColor = "white"
+						onChangeText={(text)=>this.setState({comments : text})}
+						// value={this.state.text}
+					/>	
+					
+					<View style={{marginTop : 10}}>
+						<Button
+							onPress={this.submit}
+							title="Submit Feedback"
+							color="#841584"
+							accessibilityLabel="Login into Recruitment"
+						/>		
+					</View>
+
+
+					<View style={{marginTop : 10}}>
+						<Button
+							onPress={this.submit}
+							title="Submit Feedback"
+							color="#841584"
+							accessibilityLabel="Login into Recruitment"
+						/>		
+					</View>
+
+
+
+
+					<View style={{marginTop : 10}}>
+						<Button
+							onPress={this.submit}
+							title="Submit Feedback"
+							color="#841584"
+							accessibilityLabel="Login into Recruitment"
+						/>		
+					</View>
+				</View>
+			</ScrollView>
 
 		  )
 		}
 
 	}
-export default main
-			
 			// <div style={{letterSpacing : "1.1px"}} className="col-md-12 feedback p-0 mb-5 mt-2">
 			// 	<div className="col-md-6 p-0 m-auto">
 
@@ -208,9 +292,20 @@ export default main
 		
 // 	}
 // }
-// const mapStateToProps = (state)=>{
-// 	return{
-// 		signin : state.signin
-// 	}
-// }
-// export default connect(mapStateToProps)(main)
+
+const mapDispatch = (dispatch) => {
+	return{
+		insertFeeback : (feedback) => {
+			dispatch({
+				type : "INSERT_FEEDBACK",
+				feedback
+			})
+		}
+	}
+}
+const mapStateToProps = (state)=>{
+	return{
+		signin : state.signin
+	}
+}
+export default connect(mapStateToProps,mapDispatch)(main)

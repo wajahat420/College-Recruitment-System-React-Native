@@ -1,35 +1,64 @@
 import React from 'react'
+import {View,Text,StyleSheet} from "react-native"
 
 export default function allFeedbacks(props) {
 		return (
-				<div className="col-md-12 p-0 m-2 ">
-					<h4 className="col-md-12 text-center p-0">
-						{props.email}
-					</h4>
-					<div className="row  m-0 p-2 border">
+			<View style={{display : "flex"}}>
+				<Text style={styles.email}>{props.email}</Text>
+
+				<View style={{borderWidth : 1,borderColor : "gray",marginHorizontal : 3,padding  :1}}>
+					<View style={{display : "flex",flexDirection : "row"}}>
+						<Text style={styles.items}>Web Experience</Text>
+						<Text style={styles.items}>===></Text>
+						<Text style={styles.items}>{props.web}</Text>
+					</View>
+					<View style={{display : "flex",flexDirection : "row"}}>
+						<Text style={styles.items}>Requirement Fulfilled</Text>
+						<Text style={styles.items}>===></Text>
+						<Text style={styles.items}>{props.req}</Text>					
+					</View>
+					<View style={{display : "flex",flexDirection : "row"}}>				
+						<Text style={styles.items}>Criteria Fulfilled</Text>
+						<Text style={styles.items}>===></Text>
+						<Text style={styles.items}>{props.criteria}</Text>					
+					</View>
+					<View style={{display : "flex",flexDirection : "row"}}>
+						<Text style={styles.items}>Searched For</Text>
+						<Text style={styles.items}>===></Text>
+						<Text style={styles.items}>{props.searched}</Text>					
+					</View>
+					<View style={props.comments === "" && {display : "none"}  }>
+						<Text style={{textAlign : "center",	color : "brown"}}>Review : </Text>
+						<Text style={ styles.comments}>{props.comments}</Text>					
+					</View>
+					
+				</View>
+			</View>
+				)
+			}
+			
+		
+const styles =   StyleSheet.create({
+	items : {
+		flex: 1,
+		textAlign : "center",
+		fontSize : 12,
+		marginBottom:  4
+	},
+	email : {
+		textAlign : "center",
+		fontSize : 17,
+		color : "brown",
+		fontWeight : "800",
+		marginBottom : 5,
+		textDecorationLine : "underline",
+		textDecorationColor : "blue"
+	},
+	comments : {
+		textAlign : "center",
+		marginHorizontal : 5,
+		marginTop : 2,
+		fontSize : 12
+	}
+})
 	
-						<div className="col-5 text-left p-0">
-							<p>Web Experience</p>
-							<p>Requirement Fulfilled</p>
-							<p>Criteria Fulfilled</p>
-							<p>Searched For</p>
-						</div>
-						<div className="col-2 p-0 text-center">
-							<p className="col-12 m-0 p-0"><i style={{fontSize:"2.3em",width:"100%"}} className="fa  fa-long-arrow-right"></i></p>
-							<p className="col-12 m-0 p-0"><i style={{fontSize:"2.3em",width:"100%"}} className="fa  fa-long-arrow-right"></i></p>
-							<p className="col-12 m-0 p-0"><i style={{fontSize:"2.3em",width:"100%"}} className="fa  fa-long-arrow-right"></i></p>
-							<p className="col-12 m-0 p-0"><i style={{fontSize:"2.3em",width:"100%"}} className="fa  fa-long-arrow-right"></i></p>
-						</div>
-						<div className="col-5 text-right p-0">
-							<p>{props.web}</p>
-							<p>{props.req}</p>
-							<p>{props.criteria}</p>
-							<p>{props.searched}</p>
-						</div>
-						<div className="col-10 text-center m-auto">
-							{props.comments}
-						</div>
-					</div>
-				</div>
-		)
-}

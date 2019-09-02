@@ -49,15 +49,15 @@ export default function remarks(props) {
 										<RadioButtonInput
 											obj={obj}
 											index={i}
-											isSelected={props.value3Index === i}
+											isSelected={props.valueIndex === i}
 											onPress={(i)=>props.setValueIndex(i)}
 											borderWidth={1}
-											buttonInnerColor={'#50C900'}
+											// buttonInnerColor={'#50C900'}
 											buttonOuterColor={props.valueIndex === i ? '#2196f3' : '#000'}
-											buttonSize={8}
+											buttonSize={13}
 											buttonOuterSize={20}
 											
-											buttonWrapStyle={{margin : 9}}
+											buttonWrapStyle={{margin : 8.2}}
 										/>
 									
 									</RadioButton>

@@ -1,7 +1,11 @@
 
 const reducer = (state = {
     receiver : "",
-    signin : "",
+    signin : {
+        email : "shayanmustafa1@gmail.com",
+        password : "wajahat123",
+        as : "university"
+    },
     imageURL : "",
     students : [{name : "Wajahat"},
                 {name : "Hamza"},
@@ -10,6 +14,14 @@ const reducer = (state = {
                 {name : "Rehman"}],
     messages : [],
     AllPosts : [],
+    AllFeedacks: [{
+        email : "shayanmustafa11@gmail.com",
+        fulfillingCriteria : "Good",
+        requirementFulfill : "Yes",
+        searchingFor : "Job",
+        webExperience  :"Excellent",
+        comments : "very good"
+    }],
     msgBoxTitles : [],
     openMsgWindow : "",
     searchText : "",
@@ -34,7 +46,14 @@ const reducer = (state = {
                     likes : []
                 }]
             };
-            // console.warn("All Posts",state.AllPosts)
+            console.warn("All Posts",state.AllPosts)
+            break;
+        case 'INSERT_FEEDBACK':
+            state = {
+                ...state,
+                AllFeedacks : [...state.AllFeedacks,action.feedback]
+            };
+            console.warn("All Feedbacks",state.AllFeedacks)
             break;
         case 'MSG_BOX_TITLES':
             state = {
@@ -49,7 +68,7 @@ const reducer = (state = {
                 openMsgWindow : action.openMsgWindow
             };
             // console.log("openMsgWindow",state.openMsgWindow)
-            break;  
+            break;
         case 'REMOVE_NAME_FROM_MSG_TITLES':
             const duplicate = [...state.msgBoxTitles]
             duplicate.splice(action.elemIndex,1)
@@ -64,7 +83,7 @@ const reducer = (state = {
                 ...state,
                 signin : action.signin
             };
-            // console.log("signin",state.signin)
+            console.warn("signin",state.signin)
             break; 
         case 'SET_RECEIVER':
             state = {
