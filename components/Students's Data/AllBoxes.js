@@ -4,6 +4,15 @@ import {connect} from "react-redux"
 import InfoBoxes from "./infoBox"
 import IMG from "../../images/1.jpg"
 
+import {
+	Text,
+	TouchableOpacity,
+	View,
+	TextInput,
+	ScrollView,
+	Button
+	
+} from "react-native"
 
 
  class AllBoxes extends Component {
@@ -34,11 +43,11 @@ import IMG from "../../images/1.jpg"
     render() {
         // console.log("inrender")
         return (
-            <div className="col-md-12 text-center p-0">
+            <View >
                 {
                     this.props.users.filter((obj) => this.filterArray(obj)).map((elem,index)=>{
                         return (
-                                <div 
+                                <View 
                                 key={index} 
                                 className={ (this.props.signin.as === "student" ? "col-md-5" : "col-md-3") +"  m-auto d-inline-block p-2"}>
                                     <InfoBoxes
@@ -47,11 +56,11 @@ import IMG from "../../images/1.jpg"
                                         name={elem.name}
                                         description ={elem.description}
                                         />
-                                </div>
+                                </View>
                         )
                     })
                 }
-            </div>
+            </View>
         )
     }
 } 
@@ -60,7 +69,6 @@ const mapStateToProps = (state) => {
     return{
         users : state.users,
         signin : state.signin,
-        searchText : state.searchText,
         sortBy : state.sortBy
     }
 }

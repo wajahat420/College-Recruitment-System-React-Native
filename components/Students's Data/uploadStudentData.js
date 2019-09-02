@@ -1,16 +1,60 @@
 import React, { Component } from 'react'
-import "../../css/uploadStudentData.css"
+// import "../../css/uploadStudentData.css"
+
+import {
+	Text,
+	TouchableOpacity,
+	View,
+	TextInput,
+	ScrollView,
+    Button,
+    StyleSheet
+	
+} from "react-native"
+
+import ImagePicker from 'react-native-image-picker';
+
 
 export default class uploadStudentData extends Component {
     state={
-        marksheetName : "",
-        cvName : "",
-        name : "",
-        cgpa : "",
         marksheet :"",
+        marksheetName : "",
         cv: "",
-        image : "",
+        cvName : "",
+        cgpa : "",
+        image : {"uri" : ""},
         uploaded : ""
+    }
+
+    image = () => {
+
+        const options = {
+            title: 'Select Image',
+            // customButtons: [{ name: 'fb', title: 'Choose Photo from Facebook' }],
+            storageOptions: {
+              skipBackup: true, 
+              path: 'images',
+            },
+          };
+        ImagePicker.showImagePicker(options, (response) => {
+            console.log('Response = ', response);
+            if (response.didCancel) {
+              console.log('User cancelled image picker');
+            } else if (response.error) {
+              alert('ImagePicker Error: ', response.error);
+            } else if (response.customButton) {
+              alert('User tapped custom button: ', response.customButton);
+            } else {
+              const source = { uri: response.uri };
+          
+              // You can also display the image using data:
+              // const source = { uri: 'data:image/jpeg;base64,' + response.data };
+          
+              this.setState({
+                image: source,
+              });
+            }
+          });
     }
 
     Submit = () => {
@@ -53,94 +97,52 @@ export default class uploadStudentData extends Component {
 
     
     render() {
-        // console.log("state",this.state)
+        // console.warn("state",this.state.image)
         return (
-            <div className="col-md-12 p-3">
-                <div 
-                     className="col-md-6 m-auto p-2 border uploadStudent">
-                    <table className="col-md-12 text-center">
-                        <tbody >
-                            <tr >
-                                <td style={{width : "40%"}} >
-                                    <label  htmlFor="name">Name : </label>
-                                </td>
-                                <td style={{width : "90%"}}>
-                                    <input
-                                        onChange={(e) => this.setState({name : e.target.value})}
-                                        id="name" className="col-md-12 text-center p-1"  type="text" placeholder=""/>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <label htmlFor="cgpa">CGPA : </label>
-                                </td>
-                                <td><input 
-                                        onChange ={(e)=>this.setState({cgpa : e.target.value})}
-                                        id="cgpa" className="col-md-12 text-center p-1"  type="number" placeholder=""/></td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <label 
-                                        htmlFor="marksheet" 
-                                        style={{cursor:"pointer"}}
-                                        className="col-md-12 p-0">Upload Marksheet</label>
-                                    <input 
-                                        name="marksheet"
-                                        id="marksheet" 
-                                        onChange={ this.file}
-                                        className="d-none"  
-                                        type="file"/>
-                                </td>
-                                <td >
-                                    <p  className={(this.state.marksheetName === "" ? "p-2" : "") +" m-0  col-md-12"}>{this.state.marksheetName}</p>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <label 
-                                        htmlFor="cv" 
-                                        style={{cursor:"pointer"}}
-                                        className="col-md-12  p-0">Upload CV</label>
-                                    <input
-                                        name="cv"
-                                        id="cv"
-                                        onChange={ this.file}
-                                        className="d-none"  
-                                        type="file"/>
-                                </td>
-                                <td>
-                                    <p   className={(this.state.cvName === "" ? "p-2" : " ") +" m-0   col-md-12"}>{this.state.cvName}</p> 
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <label 
-                                        htmlFor="image" 
-                                        style={{cursor:"pointer"}}
-                                        className="col-md-12  p-0">Upload image</label>
-                                    <input
-                                        name="image"
-                                        id="image"
-                                        onChange={ this.file}
-                                        className="d-none"  
-                                        type="file"/>
-                                </td>
-                                <td>
-                                    <p   className={(this.state.image === "" ? "p-2 mt-3" : "") +"    col-md-12"}>{this.state.uploaded}</p> 
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table>
-             
-                    {/*  Button  */}
-                    <div className="col-md-4 mt-3 ml-auto mr-auto p-0">
-                        <input 
-                            onClick={this.Submit}
-                            className="col-md-12 btn btn-primary " type="button" value="SUBMIT"
-                            disabled={(this.state.cvName === "" || this.state.marksheetName === "")}/>
-                    </div>
-                </div>
-            </div>
+
+            <View style={{margin : 9,borderWidth : 1.2,borderColor : "blue",padding : 4,paddingVertical : 10}}>
+                <View style={styles.container}>
+                    <Text style={styles.left}>Name</Text>
+                    <TextInput
+                        style={[styles.input,styles.right]}
+                        onChangeText ={(e)=> this.props.searchingText(e)}
+                    />
+                </View>
+                <View style={styles.container}>
+                    <Text style={styles.left}>Upload CV</Text>
+                    <Text style={styles.right}>{this.state.image["uri"]}</Text>
+                </View>
+                <View style={styles.container}>
+                    <Text style={styles.left}>Upload Marksheet</Text>
+                    <Text style={styles.right}>{this.state.image["uri"]}</Text>
+                </View>
+                <View style={styles.container}>
+                    <Text style={styles.left} onPress={this.image}>Upload Image</Text>
+                    <Text style={styles.right}>{this.state.image["uri"]}</Text>
+                </View>
+            </View>
+
         )
     }
 }
+
+const styles = StyleSheet.create({
+    container : {
+        display : "flex",
+        flexDirection : "row"
+    },
+    left : {
+        fontWeight : "700" ,
+        marginTop : 6 , 
+        flex : 1
+    },
+    input:  {
+        height : 22,
+        borderWidth : 1,
+        paddingVertical : 0,
+        paddingHorizontal : 1.8
+    },
+    right : {
+        flex:  2
+    }
+})

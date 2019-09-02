@@ -24,7 +24,6 @@ const reducer = (state = {
     }],
     msgBoxTitles : [],
     openMsgWindow : "",
-    searchText : "",
     sortBy : "name",
     users : [
         {name : "Wajahat",cgpa : "3.4",as:"university",description : "I am university student",cv: "",resume : "",img:""},

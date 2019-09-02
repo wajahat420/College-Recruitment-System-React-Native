@@ -1,24 +1,42 @@
 import React, { Component } from 'react'
-import AllBoxes from "./AllBoxes"
+// import AllBoxes from "./AllBoxes"
 import UploadStudentData from "./uploadStudentData"
 import SearchBar from "./searchBar"
 import {connect} from "react-redux"
 
+import {
+	Text,
+	TouchableOpacity,
+	View,
+	TextInput,
+	ScrollView,
+	Button
+	
+} from "react-native"
 class Main extends Component {
+
+    state = {
+        searchText : "",
+        searchBy : "name"
+    }
    
     render() {
+        // console.warn("text",this.state.searchBy)
         return (
-            <div>
-                <div className={(this.props.signin.as === "student" || this.props.signin === "") ? "d-none":""}>
-                    <SearchBar/>
-                </div>
-                <div className={(this.props.signin.as !== "student" || this.props.signin === "") ? "d-none":""}>
+            <View>
+                <View style={(this.props.signin.as === "student" || this.props.signin === "") ? "":""}>
+                    <SearchBar 
+                        searchingText = {(value)=> this.setState({searchText : value})}
+                        searchBy = {(v)=>this.setState({searchBy : v})}
+                    />
+                </View>
+                <View style={(this.props.signin.as !== "student" || this.props.signin === "") ? "":""}>
                     <UploadStudentData/>
-                </div>
-                <div>
-                    <AllBoxes/>
-                </div>
-            </div>
+                </View>
+                {/* <View>
+                    <AllBoxes searchText = {this.state.searchText}/>
+                </View> */}
+            </View>
         )
     }
 }

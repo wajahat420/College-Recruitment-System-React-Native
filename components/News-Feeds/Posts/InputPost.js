@@ -2,13 +2,12 @@ import React, { Component } from 'react'
 // import "../../../css/Posts.css"
 import {connect} from "react-redux";
 // import axios from 'axios';
-import {Text,View,Button,TextInput,Image,TouchableOpacity,StyleSheet} from "react-native"
+import {Text,View,TextInput,Image,TouchableOpacity,StyleSheet} from "react-native"
 import ImagePicker from 'react-native-image-picker';
-// import { connect } from 'tls';
 
 const options = {
     title: 'Select Image',
-    customButtons: [{ name: 'fb', title: 'Choose Photo from Facebook' }],
+    // customButtons: [{ name: 'fb', title: 'Choose Photo from Facebook' }],
     storageOptions: {
       skipBackup: true,
       path: 'images',
@@ -45,11 +44,11 @@ class Posts extends Component {
             },
           };
         if (response.didCancel) {
-          console.log('User cancelled image picker');
+          alert('User cancelled image picker');
         } else if (response.error) {
-          console.log('ImagePicker Error: ', response.error);
+          alert('ImagePicker Error: ', response.error);
         } else if (response.customButton) {
-          console.log('User tapped custom button: ', response.customButton);
+          alert('User tapped custom button: ', response.customButton);
         } else {
           const source = { uri: response.uri };
       
@@ -124,7 +123,7 @@ class Posts extends Component {
                         </View>
                         <View style={styles.bottom}>
                             <View style={{flex : 3}}>
-                                <Text style={{marginLeft : 5,marginTop :4}} onPress={this.image} htmlFor="photo" className="p-2 m-0">
+                                <Text style={{marginLeft : 5,marginTop :4}} onPress={this.image}>
                                     Image
                                 </Text>
                             </View>

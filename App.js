@@ -4,7 +4,7 @@ import Navbar from "./components/navbar/navbar"
 // import Signin from "./components/Signin/Signin"
 // import NewsFeeds from  "./components/News-Feeds/News-feeds"
 import Feedback from "./components/Feedback/main"
-
+import StudentData from "./components/Students's Data/main"
 // import Routing from "./Routing"
 import FirstPage from './first';
 import SecondPage from './second';
@@ -51,8 +51,9 @@ class App extends React.Component {
         <Fragment>
           {/* <MongoStitch/> */}
           <Navbar/>
+          <StudentData/>
           {/* <NewsFeeds/> */}
-          <Feedback/>
+          {/* <Feedback/> */}
           {/* <Routing/> */}
           {/* <Signin/> */}
         </Fragment>
